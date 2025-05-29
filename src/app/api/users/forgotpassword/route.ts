@@ -18,7 +18,14 @@ export async function POST(request:NextRequest){
     await sendEmail({email,emailType:"RESETPASSWORD",userId:user._id})
     return NextResponse.json({message: "User created successfully",success:true,email},{status:201})
 }
-catch(error:any){
-    return NextResponse.json({error:error.message},{status:500})
+catch (error: unknown) {
+  let message = 'Internal Server Error';
+
+  if (error instanceof Error) {
+    message = error.message;
+  }
+
+  return NextResponse.json({ error: message }, { status: 500 });
 }
+
 }

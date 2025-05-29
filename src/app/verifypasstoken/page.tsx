@@ -1,7 +1,6 @@
 "use client"
  
 import axios from "axios"
-import Link from "next/link"
 import React,{useEffect,useState} from "react"
 import {useRouter} from 'next/navigation'
 
@@ -9,12 +8,11 @@ export default function VerifyresetpasswordtokenPage(){
     const router = useRouter()
     const [token,settoken] = useState("")
     const [error,seterror] = useState(false)
-    const [verified,setverified] = useState(false)
     const verifyuseremail = async () => {
         try{
             const res = await axios.post('/api/users/verifyemail2',{token})
             const email = res.data.email
-            setverified(true)
+            
              router.push(`/resetpassword?email=${email}`)
         }catch(error:any){
             seterror(true)

@@ -1,10 +1,8 @@
 "use client"
 import React,{useState,useEffect} from "react"
 import axios from "axios"
-import {useRouter} from "next/navigation"
 import { CheckCircle } from "lucide-react";
-export default function forgotpasswordpage(){
-    const router = useRouter()
+export default function Forgotpasswordpage(){
     const [email,setemail] = useState("")
     const [buttondisabled,setbuttondisabled] = useState(true)
     const [error,seterror] = useState(false)
@@ -20,24 +18,27 @@ export default function forgotpasswordpage(){
   setTimeout(() => {
     setsuccess(false)
   },5000)
-} catch (err:any) {
+} catch (err: unknown) {
+  let errorMessage = "Unknown error occurred";
+
   if (axios.isAxiosError(err)) {
-    setmessage(err.response?.data?.error)
-  seterror(true)
-  setTimeout(() => {
-    seterror(false)
-  },3000)
+    errorMessage = err.response?.data?.error || err.message || errorMessage;
     console.log("Status Code:", err.response?.status);
-    console.log("Message:", err.response?.data?.error);
+    console.log("Message:", errorMessage);
+  } else if (err instanceof Error) {
+    errorMessage = err.message;
+    console.log("Error:", errorMessage);
   } else {
-    console.log("Unknown error occurred");
-    setmessage("Unknown error occured")
-  seterror(true)
-  setTimeout(() => {
-    seterror(false)
-  },3000)
+    console.log("Unknown error object:", err);
   }
+
+  setmessage(errorMessage);
+  seterror(true);
+  setTimeout(() => {
+    seterror(false);
+  }, 3000);
 }
+
     }
     useEffect(() => {
     if(email.length > 0)

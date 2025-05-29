@@ -17,20 +17,29 @@ export default function verifyEmailPage(){
             if(res.data.message === "youcanresetpass"){
               router.push('/resetpassword')
             }
-        }catch(error:any){
-            seterror(true)
-            console.log(error.response.data)
-        }
+        }catch (error: unknown) {
+  seterror(true);
+
+  if (axios.isAxiosError(error)) {
+    console.log(error.response?.data);
+  } else if (error instanceof Error) {
+    console.log(error.message);
+  } else {
+    console.log("Unknown error occurred");
+  }
+}
     }
-    useEffect(() => {
-        const urlToken = window.location.search.split("=")[1]
-        settoken(urlToken || "")
-    },[])
-    useEffect(()=> {
-        if(token.length > 0){
-             verifyuseremail()
-        }
-    },[token])
+useEffect(() => {
+  const urlToken = window.location.search.split("=")[1];
+  settoken(urlToken || "");
+}, []);
+
+useEffect(() => {
+  if (token.length > 0) {
+    verifyuseremail();
+  }
+}, [token]);
+
     return(
   <div className="flex flex-col items-center justify-center min-h-screen py-2">
     <h1 className="text-4xl">Verify Email</h1>
@@ -54,3 +63,4 @@ export default function verifyEmailPage(){
   </div>
 )
 }
+

@@ -12,10 +12,16 @@ export async function GET(request:NextRequest){
         data:user
        })
         
-    }catch(error:any){
-        return NextResponse.json({error:error.message},{status:400})
+    }catch (error: unknown) {
+  let message = 'Internal Server Error';
 
-    }
+  if (error instanceof Error) {
+    message = error.message;
+  }
+
+  return NextResponse.json({ error: message }, { status: 500 });
+}
+
 }
     
 

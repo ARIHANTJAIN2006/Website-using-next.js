@@ -8,7 +8,12 @@ export  const  getdatafromtoken = async (request: NextRequest) => {
     const token = request.cookies.get("token")?.value || ''
     const decodedtoken:any = jwt.verify(token,process.env.TOKEN_SECRET!)
     return decodedtoken.id
-    }catch(error:any){
-       throw new Error(error.message)
-    }
+    }catch (error: unknown) {
+  if (error instanceof Error) {
+    throw new Error(error.message);
+  } else {
+    throw new Error("Unknown error occurred");
+  }
+}
+
 }

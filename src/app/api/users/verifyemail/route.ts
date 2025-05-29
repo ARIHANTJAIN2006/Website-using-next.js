@@ -12,7 +12,6 @@ export async function POST(request:NextRequest){
   verifyTokenExpiry: { $gt: new Date() },
 })
             if(!user){
-                
                 return NextResponse.json({error:"Invalid Token"},{
                     status:400
                 })
@@ -26,7 +25,14 @@ export async function POST(request:NextRequest){
                success:true
     })
         }
-    catch(error:any){
-        return NextResponse.json({error:error.message})
-    }
+    catch (error: unknown) {
+  let message = 'Internal Server Error';
+
+  if (error instanceof Error) {
+    message = error.message;
+  }
+
+  return NextResponse.json({ error: message }, { status: 500 });
+}
+
 }

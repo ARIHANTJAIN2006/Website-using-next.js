@@ -19,21 +19,27 @@ export default function SignupPage(){
        const response =  await axios.post("/api/users/signup",user)
        console.log("Signup sucess",response.data)
        router.push("/login")
-      }catch(error:any){
-      console.log("Singup failed")
-      toast.error(error.message)
-      }finally{
-        setLoading(false)
-      }
+      }catch (error: unknown) {
+  console.log("Signup failed");
 
-    
+  if (error instanceof Error) {
+    toast.error(error.message);
+  } else {
+    toast.error("An unknown error occurred");
+  }
+} finally {
+  setLoading(false);
+}
     }
-    useEffect(() => {
-      if(user.email.length > 0 && user.password.length > 0 && user.username.length> 0)
-        setbuttonDisabled(false)
-      else
-      setbuttonDisabled(true)
-    })
+
+useEffect(() => {
+  if (user.email.length > 0 && user.password.length > 0 && user.username.length > 0) {
+    setbuttonDisabled(false);
+  } else {
+    setbuttonDisabled(true);
+  }
+}, [user]);  // run effect whenever user object changes
+
 
     return (
         <div className=" flex flex-col items-center  justify-center min-h-screen font-[family-name:var(--font-geist-sans)] ">

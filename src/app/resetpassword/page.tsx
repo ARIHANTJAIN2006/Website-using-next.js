@@ -20,18 +20,22 @@ export default function Resetpasswordpage() {
         
       await axios.post("/api/users/resetpassword",{newpassword,email})
       router.push('/login')
-      }catch(error:any){
-        console.log("login failed",error.message);
-      toast.error(error.message)
-      }
+      }catch (error: unknown) {
+  if (error instanceof Error) {
+    console.log("login failed", error.message);
+    toast.error(error.message);
+  } else {
+    console.log("login failed: Unknown error");
+    toast.error("An unknown error occurred");
+  }
+}
+
     }
     useEffect(() => {
         const emailParam = searchParams.get("email");
   if (emailParam) {
     setEmail(emailParam);
   }
-         console.log(newpassword,email)
-         console.log("Component mounted");
          if((newpassword === confirmedpassword) && newpassword.length > 0 && confirmedpassword.length > 0){
             setbuttondisabled(false);
             setpassmatch(false)
@@ -42,7 +46,7 @@ export default function Resetpasswordpage() {
          else if(newpassword !== confirmedpassword){
             setpassmatch(true)
         }
-    },[newpassword,confirmedpassword])
+    },[newpassword,confirmedpassword,searchParams])
     return (
         <div className=" flex flex-col items-center  justify-center min-h-screen font-[family-name:var(--font-geist-sans)]">
          <div className="flex flex-col items-center gap-4 w-full px-4">

@@ -9,7 +9,14 @@ export async function GET(){
             expires: new Date(0)
         })
     return response
-    }catch(error:any){
-        return NextResponse.json({error: error.message},{status:500})
-    }
+    }catch (error: unknown) {
+  let message = 'Internal Server Error';
+
+  if (error instanceof Error) {
+    message = error.message;
+  }
+
+  return NextResponse.json({ error: message }, { status: 500 });
+}
+
 }

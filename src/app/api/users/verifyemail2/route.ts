@@ -11,7 +11,7 @@ export async function POST(request:NextRequest){
             forgotpasswordTokenexpiry:{$gt: new Date()}})
             if(!user){
                 
-                return NextResponse.json({error:"Invalid Token"},{
+                return NextResponse.json({error:"Invalid Token or Token missing"},{
                     status:400
                 })
             }
@@ -23,7 +23,10 @@ export async function POST(request:NextRequest){
                success:true,email
     })
         }
-    catch(error:any){
-        return NextResponse.json({error:error.message})
+    catch(error:unknown){
+        if (error instanceof Error) {
+    return NextResponse.json({ error: error.message });
+  }
+  return NextResponse.json({ error: 'Unknown error occurred' });
     }
 }
