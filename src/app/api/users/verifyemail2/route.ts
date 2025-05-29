@@ -20,7 +20,7 @@ export async function POST(request:NextRequest){
             user.forgotpasswordToken = undefined
             user.forgotpasswordTokenexpiry = undefined
             await user.save()
-            return NextResponse.json({message:"Email verified",
+            return NextResponse.json({message:"youcanresetpass",
                success:true,email
     })
         }

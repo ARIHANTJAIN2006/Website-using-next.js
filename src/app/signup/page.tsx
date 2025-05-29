@@ -13,11 +13,15 @@ export default function SignupPage(){
     })
     const [buttonDisabled,setbuttonDisabled] = React.useState(false)
     const [loading,setLoading] = React.useState(false)
+    const [mass,setmass] = React.useState(false)
+
     const onSignup = async () => {
       try{
         setLoading(true)
        const response =  await axios.post("/api/users/signup",user)
+       setmass(true)
        console.log("Signup sucess",response.data)
+       
        router.push("/login")
       }catch (error: unknown) {
   console.log("Signup failed");
@@ -73,6 +77,11 @@ useEffect(() => {
         onChange={(e) => setUser({...user,password:e.target.value})}
         placeholder="password"
 ></input>
+{mass && (
+  <p className="text-green-400 text-lg font-semibold text-center mt-6 animate-pulse">
+  📧 Verification link sent! Please check your Gmail inbox.
+</p>
+)}
 <button
   type="submit"
   onClick={onSignup}

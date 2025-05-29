@@ -1,7 +1,6 @@
 "use client";
 
 import axios from "axios";
-import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -23,9 +22,13 @@ export default function VerifyEmailPage() {
       try {
         const res = await axios.post("/api/users/verifyemail2", { token });
         setVerified(true);
+        
+        if(res.data.success){
+          const email = res.data.email
         if (res.data.message === "youcanresetpass") {
-          router.push("/resetpassword");
+          router.push(`/resetpassword?email=${email}`);
         }
+      }
       } catch (error: unknown) {
         setError(true);
         if (axios.isAxiosError(error)) {
@@ -53,7 +56,6 @@ export default function VerifyEmailPage() {
       {verified && (
         <div>
           <h2 className="text-2xl">Email Verified</h2>
-          <Link href="/login">Login</Link>
         </div>
       )}
       {error && (

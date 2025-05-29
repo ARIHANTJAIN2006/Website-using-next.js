@@ -10,6 +10,7 @@ export async function GET(request:NextRequest){
        const user =  await User.findById(userID).select("-password")
        return NextResponse.json({
         message:"user found",
+        success:true,
         data:user
        })
         
