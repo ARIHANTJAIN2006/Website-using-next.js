@@ -7,7 +7,7 @@ export default function Home() {
     <div className="min-h-screen bg-black flex flex-col items-center justify-center px-4">
       {/* Header with gradient text */}
       <h1 className="text-5xl font-extrabold mb-8 text-center bg-gradient-to-r from-yellow-400 via-pink-500 to-red-500 bg-clip-text text-transparent drop-shadow-lg">
-        ARIHANT&apos;S DEV STUDIO
+        ARIHANT DEV STUDIO
       </h1>
       <div className="relative w-full h-6 overflow-hidden bg-black">
   <div
@@ -52,9 +52,7 @@ export default function Home() {
     }
   `}</style>
 </div>
-
-
-      {/* Card with sharp gradient border */}
+  {/* Card with sharp gradient border */}
       <div
         className="max-w-md w-full rounded-lg p-8 bg-gray-900 relative"
         style={{
@@ -85,6 +83,8 @@ export default function Home() {
           </a>
         </div>
       </div>
+
+    
     </div>
   );
 }
