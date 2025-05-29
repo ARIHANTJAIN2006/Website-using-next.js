@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import axios from 'axios'
+import Link from 'next/link'
 
 export default function Home() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -93,28 +94,27 @@ export default function Home() {
           </p>
 
           <div className="flex justify-center gap-6">
-            <a
-              href="/login"
-              className="bg-blue-600 hover:bg-blue-700 text-white rounded-md px-6 py-3 font-semibold shadow-lg transition"
-            >
-              LOGIN
-            </a>
-            <a
-              href="/signup"
-              className="bg-green-600 hover:bg-green-700 text-white rounded-md px-6 py-3 font-semibold shadow-lg transition"
-            >
-              SIGN UP
-            </a>
+            <Link href="/login" passHref>
+    <a className="bg-blue-600 hover:bg-blue-700 text-white rounded-md px-6 py-3 font-semibold shadow-lg transition">
+      LOGIN
+    </a>
+  </Link>
+
+  <Link href="/signup" passHref>
+    <a className="bg-green-600 hover:bg-green-700 text-white rounded-md px-6 py-3 font-semibold shadow-lg transition">
+      SIGN UP
+    </a>
+  </Link>
           </div>
         </div>
       )}
       {isAuthenticated && (
-  <a
+  <Link
     href="/profile"
     className="mt-10 inline-block px-6 py-3 bg-gradient-to-r from-green-400 to-blue-500 text-white font-semibold rounded-lg shadow-md hover:from-green-500 hover:to-blue-600 transition duration-300"
   >
     Go to Profile
-  </a>
+  </Link>
 )}
 
     </div>
