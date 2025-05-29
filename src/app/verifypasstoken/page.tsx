@@ -21,7 +21,7 @@ export default function VerifyEmailPage() {
   useEffect(() => {
     const verifyUserEmail = async () => {
       try {
-        const res = await axios.post("/api/users/verifyemail", { token });
+        const res = await axios.post("/api/users/verifyemail2", { token });
         setVerified(true);
         if (res.data.message === "youcanresetpass") {
           router.push("/resetpassword");
