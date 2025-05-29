@@ -14,10 +14,17 @@ export default function VerifyresetpasswordtokenPage(){
             const email = res.data.email
             
              router.push(`/resetpassword?email=${email}`)
-        }catch(error:any){
-            seterror(true)
-            console.log(error.response.data)
-        }
+        }catch (error: unknown) {
+  seterror(true);
+
+  if (axios.isAxiosError(error)) {
+    console.log(error.response?.data);
+  } else if (error instanceof Error) {
+    console.log(error.message);
+  } else {
+    console.log("Unknown error occurred");
+  }
+}
     }
     useEffect(() => {
         const urlToken = window.location.search.split("=")[1]

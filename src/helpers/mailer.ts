@@ -2,14 +2,20 @@ import nodemailer from 'nodemailer';
 import bcryptjs from 'bcryptjs';
 import User from '../models/usermodels.js';
 
-export const sendEmail = async ({ email, emailType, userId }: any) => {
+interface SendEmailParams {
+  email: string;
+  emailType: 'VERIFY' | 'RESETPASSWORD';
+  userId: string;
+}
+
+export const sendEmail = async ({ email, emailType, userId }: SendEmailParams) => {
   try {
     const hashedToken = await bcryptjs.hash(userId.toString(), 10);
 
     if (emailType === 'VERIFY') {
       await User.findByIdAndUpdate(userId, {
         verifyToken: hashedToken,
-        verifyTokenExpiry: Date.now() + 3600000,
+        verifyTokenExpiry: Date.now() + 3600000, // 1 hour
       });
     } else if (emailType === 'RESETPASSWORD') {
       await User.findByIdAndUpdate(userId, {
@@ -36,11 +42,10 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
     const mailResponse = await transport.sendMail(mailOptions);
     return mailResponse;
   } catch (error: unknown) {
-  if (error instanceof Error) {
-    throw new Error(error.message);
-  } else {
-    throw new Error("Unknown error occurred");
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    } else {
+      throw new Error("Unknown error occurred in sendEmail");
+    }
   }
-}
-
 };

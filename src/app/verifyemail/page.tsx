@@ -5,7 +5,7 @@ import Link from "next/link"
 import React,{useEffect,useState} from "react"
 import {useRouter} from 'next/navigation'
 
-export default function verifyEmailPage(){
+export default function VerifyEmailPage(){
     const router = useRouter()
     const [token,settoken] = useState("")
     const [error,seterror] = useState(false)

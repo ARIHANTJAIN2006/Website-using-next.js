@@ -23,18 +23,26 @@ export default function LoginPage() {
       console.log("Login success", response.data)
       toast.success("Login success")
       router.push("/profile")
-    } catch (error: any) {
-      setError(true)
-      if (error.response?.data?.error) {
-        setMessage(error.response.data.error)
-        toast.error(error.response.data.error)
-      } else {
-        setMessage(error.message)
-        toast.error(error.message)
-      }
-      setTimeout(() => setError(false), 3000)
-      console.log("login failed", error)
-    }
+    } catch (err: unknown) {
+  setError(true);
+
+  let errorMessage = "Unknown error occurred";
+
+  if (axios.isAxiosError(err)) {
+    errorMessage = err.response?.data?.error || err.message || errorMessage;
+    console.log("Status Code:", err.response?.status);
+    console.log("Message:", errorMessage);
+  } else if (err instanceof Error) {
+    errorMessage = err.message;
+    console.log("Error:", errorMessage);
+  } else {
+    console.log("Unknown error object:", err);
+  }
+
+  setTimeout(() => setError(false), 3000);
+  console.log("Login failed", err);
+}
+
   }
 
   useEffect(() => {

@@ -2,9 +2,10 @@ import { connect } from "../../../dbconfig/dbconfig"
 import User from "../../../../models/usermodels"
 import {NextRequest,NextResponse} from "next/server"
 
-connect()
+
 export async function POST(request:NextRequest){
     try{
+        await connect()
         const reqBody = await request.json()
         const {token} = reqBody
         const user = await User.findOne({forgotpasswordToken:token,
