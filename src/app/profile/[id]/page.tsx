@@ -1,16 +1,18 @@
-interface PageProps {
+// File: src/app/profile/[id]/page.tsx
+
+interface PageParams {
   params: {
     id: string;
   };
 }
 
-export default function UserProfile({ params }: PageProps) {
+export default function UserProfile({ params }: PageParams) {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen font-[family-name:var(--font-geist-sans)]">
       <h1 className="text-2xl">Profile</h1>
-      <hr className="w-full my-2 border-t border-gray-300" />
+      <hr />
       <p className="text-2xl">
-        Profile Page <span className="bg-orange-500 px-2 py-1 rounded">{params.id}</span>
+        Profile Page <span className="bg-orange-500">{params.id}</span>
       </p>
     </div>
   );
