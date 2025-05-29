@@ -4,7 +4,7 @@ interface PageParams {
   };
 }
 
-export default async function UserProfile({ params }: PageParams) {
+export default function UserProfile({ params }: PageParams) {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen font-[family-name:var(--font-geist-sans)]">
       <h1 className="text-2xl">Profile</h1>
@@ -15,6 +15,7 @@ export default async function UserProfile({ params }: PageParams) {
     </div>
   );
 }
+
 
 
 
