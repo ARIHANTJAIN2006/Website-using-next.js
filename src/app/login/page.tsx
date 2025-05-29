@@ -8,7 +8,7 @@ import toast from "react-hot-toast"
 
 export default function LoginPage() {
   const router = useRouter()
-  const [message, setMessage] = React.useState("")
+  const [messag, setMessag] = React.useState("")
   const [user, setUser] = React.useState({
     email: "",
     password: "",
@@ -38,6 +38,7 @@ export default function LoginPage() {
   } else {
     console.log("Unknown error object:", err);
   }
+  setMessag(errorMessage)
 
   setTimeout(() => setError(false), 3000);
   console.log("Login failed", err);
@@ -78,7 +79,7 @@ export default function LoginPage() {
           className="w-full px-4 py-2 rounded-md bg-gray-900 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         {error && (
-          <p className="mt-2 text-sm text-red-600">{message}</p>
+          <p className="mt-2 text-sm text-red-600">{messag}</p>
         )}
         <button
           type="submit"

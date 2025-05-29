@@ -29,7 +29,7 @@ export default function VerifyresetpasswordtokenPage(){
     useEffect(() => {
         const urlToken = window.location.search.split("=")[1]
         settoken(urlToken || "")
-    },[])
+    })
     useEffect(()=> {
         if(token.length > 0){
              verifyuseremail()
