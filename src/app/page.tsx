@@ -94,16 +94,18 @@ export default function Home() {
           </p>
 
           <div className="flex justify-center gap-6">
-            <Link href="/login" passHref>
-    <a className="bg-blue-600 hover:bg-blue-700 text-white rounded-md px-6 py-3 font-semibold shadow-lg transition">
-      LOGIN
-    </a>
+            <Link
+    href="/login"
+    className="bg-blue-600 hover:bg-blue-700 text-white rounded-md px-6 py-3 font-semibold shadow-lg transition"
+  >
+    LOGIN
   </Link>
 
-  <Link href="/signup" passHref>
-    <a className="bg-green-600 hover:bg-green-700 text-white rounded-md px-6 py-3 font-semibold shadow-lg transition">
-      SIGN UP
-    </a>
+ <Link
+    href="/signup"
+    className="bg-green-600 hover:bg-green-700 text-white rounded-md px-6 py-3 font-semibold shadow-lg transition"
+  >
+    SIGN UP
   </Link>
           </div>
         </div>
